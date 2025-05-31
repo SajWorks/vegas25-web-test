@@ -29,8 +29,11 @@
 
     async function fetchData() {
       try {
-        const res = await fetch(API_URL);
-        console.log(res)
+        const res = await fetch(API_URL, {
+            headers: {
+                'ngrok-skip-browser-warning': 'true'
+            }
+        });
         const data = await res.json();
         document.getElementById('tempF').textContent = data.tempF ?? '--';
         document.getElementById('tempC').textContent = data.tempC ?? '--';
