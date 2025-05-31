@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sensor Data Viewer</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 2em;
+    }
+    h1 {
+      font-size: 2em;
+    }
+    .data {
+      font-size: 1.5em;
+      margin: 1em 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Live Sensor Data</h1>
+  <div class="data">Temperature (°F): <span id="tempF">--</span> °</div>
+  <div class="data">Temperature (°C): <span id="tempC">--</span> °</div>
+  <div class="data">Humidity: <span id="hum">--</span> %</div>
+
+  <script>
+    const API_URL = 'https://amazing-crane-ghastly.ngrok-free.app/api/data'; // Update this to your endpoint
+
+    async function fetchData() {
+      try {
+        const res = await fetch(API_URL);
+        console.log(res)
+        const data = await res.json();
+        document.getElementById('tempF').textContent = data.tempF ?? '--';
+        document.getElementById('tempC').textContent = data.tempC ?? '--';
+        document.getElementById('hum').textContent = data.humidity ?? '--';
+      } catch (err) {
+        console.error('Error fetching data:', err);
+      }
+    }
+
+    fetchData();
+    setInterval(fetchData, 3000); // Refresh every 3 seconds
+  </script>
+</body>
+</html>
