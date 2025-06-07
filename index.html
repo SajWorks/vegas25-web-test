@@ -19,32 +19,12 @@
   </style>
 </head>
 <body>
-  <h1>Live Sensor Data</h1>
+  <h1>SajWorks Vegas25 Project</h1>
   <div class="data">Temperature (°F): <span id="tempF">--</span> °</div>
   <div class="data">Temperature (°C): <span id="tempC">--</span> °</div>
   <div class="data">Humidity: <span id="hum">--</span> %</div>
+  <button id="playBtn">PLAY</button>
 
-  <script>
-    const API_URL = 'https://amazing-crane-ghastly.ngrok-free.app/api/data'; // Update this to your endpoint
-
-    async function fetchData() {
-      try {
-        const res = await fetch(API_URL, {
-            headers: {
-                'ngrok-skip-browser-warning': 'true'
-            }
-        });
-        const data = await res.json();
-        document.getElementById('tempF').textContent = data.tempF ?? '--';
-        document.getElementById('tempC').textContent = data.tempC ?? '--';
-        document.getElementById('hum').textContent = data.humidity ?? '--';
-      } catch (err) {
-        console.error('Error fetching data:', err);
-      }
-    }
-
-    fetchData();
-    setInterval(fetchData, 3000); // Refresh every 3 seconds
-  </script>
+  <script src="api.js"></script>
 </body>
 </html>
